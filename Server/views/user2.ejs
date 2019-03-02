@@ -1,0 +1,154 @@
+<html>
+    <head>
+        <title>
+            List Of Routes
+        </title>
+    </head>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+} 
+
+#app{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+ul {
+    overflow: hidden;
+    list-style-type: none;
+    background-color: #333;
+}
+
+li {
+    float: left;
+    color: white;
+    padding: 4px;
+}
+
+li a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+li ul{
+    margin-left: 16px;
+    text-align: center;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+table {
+    margin:1em auto;
+    border: 1px solid black;
+}
+
+ th, td{
+    border: 1px solid black;
+}
+
+th, td {
+    padding: 15px;
+}
+
+ol {
+    list-style-type: none;
+    background-color: beige;
+}
+
+#content {
+    flex: 1;
+}
+
+#main {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+    </style>
+
+    <body>
+        <!-- <h1>
+            List Of Routes
+        </h1> -->
+
+        <body>
+                <div style="padding: 8%; background-color: black; -webkit-text-fill-color: teal; text-align: center;">
+                    <h1>LIST OF ROUTES</h1>
+                    <br><br>
+                    <h2>Source : JanakPuri</h2>
+                    <h2>Destination : AIIMS</h2>
+                </div>
+                <!-- <div id="Agency Menu">
+                    <ul>
+                        <li><a href="BreakdownsInfo.html"> Breakdowns </a></li>
+                        <li><a href="DemandAnalysis.html"> Demand Analysis </a></li>
+                        <li><a> Feedback forms </a></li>
+                        <li style="float:right;"><a> Logout </a></li>
+                    </ul>
+                </div> -->
+
+                <!-- <div id = "top" style = "text-align: center;" >
+                   
+                </div> -->
+
+                <div id="Demands">
+                    <table>
+                        <tr>
+                            <th> <b>BusID</b> </th>
+                            <th> <b>Number of stations on the way</b> </th>
+                            <th> <b>Change (if any)</b> </th>
+                            <th> <b>Current Empty Seats</b> </th>
+                            <th> <b>Predicted Range(At JanakPuri) </b> </th>
+                            <th> <b>Ratings </b> </th>
+                        </tr>
+
+                        <tr>
+                                <th> <b>720</b> </th>
+                                <th> <b>10</b> </th>
+                                <th> <b>-</b> </th>
+                                <th> <b>25</b> </th>
+                                <th> <b> 5-10 </b> </th>
+                                <th> <b>3 </b> </th>
+                            </tr>
+
+                    </table>
+                </div>
+                <br>
+                <br>
+                <form action="/feedback" method="GET">
+                    <button id = "1" style="font-size: 25px;color: teal;background: transparent;border: transparent;margin-left: 45%;"> <b>FEEDBACK</b></button>
+                  </form>
+            </body>
+        <!-- <table style="width:100%">
+                <tr>
+                  <th>Bus No.</th>
+                  <th>No. of stations on the way</th> 
+                  <th>Change(If any)</th>
+                  <th>Current No. of Seats</th>
+                  <th>Predicted No. of seats</th>
+                  <th>Rating</th>
+                </tr>
+                <tr>
+                  <td>740</td>
+                  <td>10</td> 
+                  <td>-</td>
+                  <td>25</td>
+                  <td>5-10</td>
+                  <td>3</td>
+                </tr>
+              </table>
+    </body> -->
+</html>

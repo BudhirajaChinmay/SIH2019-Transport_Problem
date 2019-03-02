@@ -1,0 +1,74 @@
+<!-- [READ] This is an ejs file which is parsed into an html file before being sent to the browser (this is where our template engine is used!) -->
+<html>
+    <style>
+     h1{
+        font-size: 3em;
+        color:teal;
+        text-align: center;
+        /* margin-right: 150; */
+    }
+
+    #h{
+    background-color:black;
+    /* width: 100%; */
+    /* height:30; */
+    padding: 3%;
+  border: 1px solid black; 
+    }
+
+    #asd{
+        
+    }
+
+    </style>
+    <head>
+        <!-- [TODO 1] place the title here from the context being passed -->
+        <title>
+            Feedback
+        </title>
+    </head>
+    <body>
+        <section id="h">
+                <h1>Feedback</h1>
+        </section>
+        
+
+        <!-- [READ] this is a form which is used to submit the data for an event -->
+        
+        <div>
+            <!-- [TODO 2] add url to submit the form data -->
+            <form action="/events/eate" method="POST">
+                <h3>Did you get seat as predicted ?</h3>
+                <form>
+                        <input type="radio" name="Ques1" value="0">Yes<br>
+                        <input type="radio" name="Ques1" value="1">No<br>
+                </form>
+                <h3>Rate the cleaniliness of the bus</h3>
+                <form>
+                        <input type="radio" name="Ques2" value="0">1<br>
+                        <input type="radio" name="Ques2" value="1">2<br>
+                        <input type="radio" name="Ques2" value="1">3<br>
+                </form>
+                <h3>Were you feeling safe during the ride ?</h3>
+                <form>
+                        <input type="radio" name="Ques3" value="0">Yes<br>
+                        <input type="radio" name="Ques3" value="1">No<br>
+                </form>
+                <!-- <fieldset>
+                    <input type="number" name="Review" placeholder="Event Name">
+                </fieldset> -->
+                <h3>Enter your personal Review</h3>
+                <fieldset>
+                    <textarea name="description" placeholder="Review"></textarea>
+                </fieldset>
+                <!-- <fieldset>
+                    <input type="datetime-local" name="date">
+                </fieldset> -->
+                <input id="asd" type="submit" value="Submit">
+            </form>
+        </div>
+
+    </body>
+
+
+</html>

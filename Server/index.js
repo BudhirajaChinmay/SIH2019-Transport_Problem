@@ -2,8 +2,9 @@
 const express = require("express");
 var mysql = require('mysql');
 const bodyparser = require('body-parser');
-const Route = require('./Routes');
+var http = require('http');
 
+const Route = require('./Routes');
 const app = express();
 const port = 8000;
 
@@ -40,7 +41,7 @@ else{
     day = "Sunday";
 }
 
-// Establishing connection to the database
+// Establishing connection to the SQL database
 var con = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -48,6 +49,15 @@ var con = mysql.createConnection({
     database : 'my_db'
   });
 
+// setup the connection with db by requiring it from config/mongoose.js
+
+const db=require('./config/mongoose');
+
+// install ejs and set the template engine
+app.set('view engine', 'ejs');
+
+// add middleware to use the router by requiring it from routes/index.js
+app.use('/',require('./routes/index'));
 /*
 
         FUNCTIONS 
@@ -197,45 +207,46 @@ app.use(bodyparser.urlencoded({extended: false}));
 app.post('/',function(request,response){
 
     con.connect();
-    var BusNumber = request.body.user.busnumber.toString(10);
-    var timeofArrival  = request.body.user.toa;
-    var Boarding  = request.body.user.boarded.toString(10);
-    var Deboarding = request.body.user.deboarded.toString(10);
+    // var BusNumber = request.body.user.busnumber.toString(10);
+    // var timeofArrival  = request.body.user.toa;
+    // var Boarding  = request.body.user.boarded.toString(10);
+    // var Deboarding = request.body.user.deboarded.toString(10);
 
-    //  **TODO :- Add the value of the current stop** 
-    var currentstop ;
+    // //  **TODO :- Add the value of the current stop** 
+    // var currentstop = request.body.user.stop;
 
-    // Old valuen to update the new value
-    con.query("SELECT " + day + " FROM " + BusNumber + currentstop + " where + TOA = " + timeofArrival, function (err, result, fields) {
-        if (err) throw err;
-        var entry = result;
-        var seatsAtPreviosStop;
+    // // Old valuen to update the new value
+    // con.query("SELECT " + day + " FROM " + BusNumber + currentstop + " where + TOA = " + timeofArrival, function (err, result, fields) {
+    //     if (err) throw err;
+    //     var entry = result;
+    //     var seatsAtPreviosStop;
         
-        if(stops.length == 0){
-            seatsAtPreviosStop = 0;
-        }
-        else{
-            seatsAtPreviosStop = stops[stops.length-1];
-        }
+    //     if(stops.length == 0){
+    //         seatsAtPreviosStop = 0;
+    //     }
+    //     else{
+    //         seatsAtPreviosStop = stops[stops.length-1];
+    //     }
 
-        var currentSeats = Boarding - Deboarding + seatsAtPreviosStop;
-        stops.push(currentSeats);
+    //     var currentSeats = Boarding - Deboarding + seatsAtPreviosStop;
+    //     stops.push(currentSeats);
 
-        var temp = entry[0].Monday.split(":");
-        var data = temp[0].split(",");
-        data.push(currentSeats.toString(10));
+    //     var temp = entry[0].Monday.split(":");
+    //     var data = temp[0].split(",");
+    //     data.push(currentSeats.toString(10));
 
-        var updatedrange = RangeOfSeats(data);
-        var range = updatedrange[0].toString(10) + ":" + updatedrange[1].toString(10);
+    //     var updatedrange = RangeOfSeats(data);
+    //     var range = updatedrange[0].toString(10) + ":" + updatedrange[1].toString(10);
 
-        var updateddatapoint = data+","+range;
-        // Update the value
+    //     var updateddatapoint = data+","+range;
+    //     // Update the value
 
-        con.query("UPDATE " + BusNumber + currentstop + " SET "+ day + " = " + updateddatapoint + " where TOA = " + timeofArrival, function (err, result, fields) {
-            if (err) throw err;
-        });
+    //     con.query("UPDATE " + BusNumber + currentstop + " SET "+ day + " = " + updateddatapoint + " where TOA = " + timeofArrival, function (err, result, fields) {
+    //         if (err) throw err;
+    //     });
 
-    });
+    // });
+    // console.log("aajaaajaaajaaajajjajajajaj");
 
     con.end();
 

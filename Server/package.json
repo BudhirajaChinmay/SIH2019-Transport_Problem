@@ -17,10 +17,14 @@
   },
   "homepage": "https://github.com/gdgnewdelhi/web-dev-day#readme",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "fs": "0.0.1-security",
+    "http": "0.0.0",
     "mongoose": "^5.4.8",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "request": "^2.88.0"
   }
 }
