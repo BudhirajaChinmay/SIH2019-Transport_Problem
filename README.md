@@ -9,6 +9,10 @@ range of no. of vacant seats on Monday3 = (no. of vacant seats on Monday2+mean c
 Storing data of no. of vacant seats:
 ![picture](/Graphs.png-page-0.png)
 
+From no. of vacant seats we calculate the change in no. of seats:
+![picture](/presentation.png)
+
+From this example we can see that mean change is approximately 4.
 
 If from stop our prediction of no. of vacant seats comes out to be wrong.For eg- predicted range for the stop1 was 5-10 but no. of vacants available were only 3.Then to make it consistent for all the subsequent stops in route we would add delta change=3-5=-2 to ranges of subsequent stops.If predicted range for stop2 was 3-8 then new range would become 1-6.By this we can make our prediction consistent with dynamic data coming.
 
