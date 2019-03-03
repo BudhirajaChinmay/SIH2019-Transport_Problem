@@ -39,3 +39,8 @@ For all the models, it has controller that creates the object of the model type 
 **Route:**
 
 It contains the index.js file that helps in routing in website.It uses express.route and get and post for routing.
+
+**Feedbacksql.js**
+
+The responses we get from feedback forms are for 3 different parameters ( Safety of Travel, Accuracy of our Prediction of Vacant Seats and Measure of Cleanliness of that mode of transportation ) for judging the convenience of travelling via that mode of transportation. 
+These responses are stored in the MySQL database and the average response is calculated for each data entry and which is then used to rate that mode of transportation.
