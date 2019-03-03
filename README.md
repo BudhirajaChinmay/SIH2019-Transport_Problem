@@ -8,19 +8,20 @@ Prerequistes:
     A little familiarity with the Terminal/Powershell/Command Prompt
     Node.js
 
-Setup the project
+Setting up the project
 
-    Download the folder/repository (or clone it if you know git)
-    Open the folder in VS Code using 'Open Folder' from File in the top main menu
-    Start Terminal from Terminal > New Terminal (in main menu)
-    In the Terminal, run npm install Now you have almost your libraries setup and the project is ready to be run
-    You can check the list of libraries which have been installed in the file ==package.json==
+  For the project, to install the required packages, 'npm install' command is used.
+  SQL Server needs to be installed.
 
-This web application provides the general user who provides source and destination in the app all the routes available for that user and destination and gives us a predicted no. of seats available in the bus when the bus comes on the stop from where user will board the bus.It all gives the government agencies data for all the buses whoes frequency needs to be increases as well as buses whoses no. of seats need to be increased.
+This web application gives the general user providing source and destination in the app, all the routes available for that user and gives us a predicted no. of seats available in the bus when the bus comes on the stop from where user will board the bus.It gives the government agencies data for all the buses whose frequency needs to be increased as well as buses whose no. of seats need to be increased.
 
-Our algorithm stores no. of vacant seats of available for all stopes for all stops at all the time for every day of the week.It then calculates the change in no. of vacant seats at plots it's graph(For eg- no of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and no. of vacant seats on Monday2 of stop1 at time t1 was 15, then change in no. of seats in 5).We calculate the average mean of changes and standard deviation of changes.Every change would lie between average change + standard deviation and average change-standard deviation.So,when we have to predict the data of Monday3 when we have data till Monday2 then-
+Our algorithm stores the no. of vacant seats available for all stops for all buses at every time interval a particular bus operates and for every day of the week. It then calculates the change in no. of vacant seats and plots it's graph(For eg- no of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and no. of vacant seats on Monday2 of stop1 at time t1 was 15, then change in no. of seats in 5).We calculate the average and standard deviation of the change in the no. of vacant seats.
 
-range of no. of vacant seats on Monday3 = (no. of vacant seats on Monday2+mean change-standard deviation) to (no. of vacant seats on Monday2+mean change + standard deviation)
+Every change would lie between average change + standard deviation and average change - standard deviation. 
+
+So,when we have to predict the data of Monday3 we take the range of no. of vacant seats as :
+
+(no. of vacant seats on Monday2 + mean change - standard deviation) to (no. of vacant seats on Monday2+mean change + standard deviation)
 
 Storing data of no. of vacant seats:
 ![picture](/Graphs.png-page-0.png)
@@ -30,6 +31,4 @@ From no. of vacant seats we calculate the change in no. of seats:
 
 From this example we can see that mean change is approximately 4.
 
-If from stop our prediction of no. of vacant seats comes out to be wrong.For eg- predicted range for the stop1 was 5-10 but no. of vacants available were only 3.Then to make it consistent for all the subsequent stops in route we would add delta change=3-5=-2 to ranges of subsequent stops.If predicted range for stop2 was 3-8 then new range would become 1-6.By this we can make our prediction consistent with dynamic data coming.
-
-Our project consists of 2 folders-database and server.Database stores all the dat we require like no. of vacant seats in the sql database.Server database consists of our node.js server that hosts our website.
+If for a particular stop our prediction of no. of vacant seats comes out to be wrong. For eg- predicted range for a stop-i was 5-10 but no. of vacants available were only 3.Then to make it consistent for all the subsequent stops in route we would add delta change=3-5=-2 to ranges of subsequent stops.If predicted range for stop2 was 3-8 then new range would become 1-6.By this we can make our prediction consistent with dynamic data coming.
