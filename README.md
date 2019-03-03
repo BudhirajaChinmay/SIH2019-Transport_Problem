@@ -7,6 +7,8 @@ Prerequistes:
     JavaScript
     A little familiarity with the Terminal/Powershell/Command Prompt
     Node.js
+    SQL
+    MongoDB
 
 Setting up the project
 
