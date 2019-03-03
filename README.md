@@ -10,7 +10,7 @@ Storing data of no. of vacant seats:
 ![picture](/Graphs.png-page-0.png)
 
 From no. of vacant seats we calculate the change in no. of seats:
-![picture](/presentation.png)
+![picture](/Presentation1.png)
 
 From this example we can see that mean change is approximately 4.
 
