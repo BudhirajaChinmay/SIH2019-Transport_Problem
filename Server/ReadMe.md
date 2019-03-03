@@ -8,7 +8,7 @@ It has all dependices that need to be installed to run this project.
 
 View:
 
-This folder contains all the ejs files for our website.It contains-6
+This folder contains all the ejs files for our website.It contains-
 
 1)basic.ejs-our webpage main page
 
