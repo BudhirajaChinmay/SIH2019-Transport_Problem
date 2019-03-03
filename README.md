@@ -6,6 +6,7 @@ Prerequistes:
     CSS
     JavaScript
     A little familiarity with the Terminal/Powershell/Command Prompt
+    Node.js
 
 Setup the project
 
