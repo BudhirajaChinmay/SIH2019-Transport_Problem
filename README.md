@@ -17,7 +17,7 @@ Setting up the project
 
 This web application gives the general user providing source and destination in the app, all the routes available for that user and gives us a predicted no. of seats available in the bus when the bus comes on the stop from where user will board the bus.It gives the government agencies data for all the buses whose frequency needs to be increased as well as buses whose no. of seats need to be increased.
 
-Our algorithm stores the no. of vacant seats available for all stops for all buses at every time interval a particular bus operates and for every day of the week. It then calculates the change in no. of vacant seats and plots it's graph(For eg- no of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and no. of vacant seats on Monday2 of stop1 at time t1 was 15, then change in no. of seats in 5).We calculate the average and standard deviation of the change in the no. of vacant seats.
+This algorithm stores the number of vacant seats available for all stops for all buses at every time interval and for every day of the week for which a particular bus operates. It then calculates the change in no. of vacant seats and plots it's graph(For eg- no of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and no. of vacant seats on Monday2 of stop1 at time t1 was 15, then change in no. of seats in 5).We calculate the average and standard deviation of the change in the no. of vacant seats.
 
 Every change would lie between average change + standard deviation and average change - standard deviation. 
 
