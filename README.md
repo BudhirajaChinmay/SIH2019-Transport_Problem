@@ -7,6 +7,13 @@ Prerequistes:
     JavaScript
     A little familiarity with the Terminal/Powershell/Command Prompt
 
+Setup the project
+
+    Download the folder/repository (or clone it if you know git)
+    Open the folder in VS Code using 'Open Folder' from File in the top main menu
+    Start Terminal from Terminal > New Terminal (in main menu)
+    In the Terminal, run npm install Now you have almost your libraries setup and the project is ready to be run
+    You can check the list of libraries which have been installed in the file ==package.json==
 
 This web application provides the general user who provides source and destination in the app all the routes available for that user and destination and gives us a predicted no. of seats available in the bus when the bus comes on the stop from where user will board the bus.It all gives the government agencies data for all the buses whoes frequency needs to be increases as well as buses whoses no. of seats need to be increased.
 
