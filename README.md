@@ -1,5 +1,13 @@
 # SIH2019-Transport_Problem
 
+Prerequistes:
+
+    HTML
+    CSS
+    JavaScript
+    A little familiarity with the Terminal/Powershell/Command Prompt
+
+
 This web application provides the general user who provides source and destination in the app all the routes available for that user and destination and gives us a predicted no. of seats available in the bus when the bus comes on the stop from where user will board the bus.It all gives the government agencies data for all the buses whoes frequency needs to be increases as well as buses whoses no. of seats need to be increased.
 
 Our algorithm stores no. of vacant seats of available for all stopes for all stops at all the time for every day of the week.It then calculates the change in no. of vacant seats at plots it's graph(For eg- no of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and no. of vacant seats on Monday2 of stop1 at time t1 was 15, then change in no. of seats in 5).We calculate the average mean of changes and standard deviation of changes.Every change would lie between average change + standard deviation and average change-standard deviation.So,when we have to predict the data of Monday3 when we have data till Monday2 then-
