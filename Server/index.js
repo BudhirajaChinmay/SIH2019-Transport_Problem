@@ -3,10 +3,12 @@ const express = require("express");
 var mysql = require('mysql');
 const bodyparser = require('body-parser');
 var http = require('http');
-
+const cors = require("cors");
 const Route = require('./Routes');
 const app = express();
 const port = 8000;
+const  numberofseats = 60;
+app.use(cors());
 
 // Input by the user
 var source,destination;
@@ -16,7 +18,9 @@ var date = new Date();
 var intday = date.getDay();
 var day;
 
-// Variable to store the stops encountered
+var datasets = require('./controllers/events_controller');
+// Variable to store the stops encounteredsudo netstat -plnt
+
 var stops = [];
 
 if(intday == 0){
@@ -38,7 +42,7 @@ else if(intday == 5){
     day = "Friday";
 }
 else{
-    day = "Sunday";
+    day = "Saturday";
 }
 
 // Establishing connection to the SQL database
@@ -49,6 +53,7 @@ var con = mysql.createConnection({
     database : 'my_db'
   });
 
+  
 // setup the connection with db by requiring it from config/mongoose.js
 
 const db=require('./config/mongoose');
@@ -56,30 +61,24 @@ const db=require('./config/mongoose');
 // install ejs and set the template engine
 app.set('view engine', 'ejs');
 
+app.use(express.urlencoded({extended: false}));
+
 // add middleware to use the router by requiring it from routes/index.js
 app.use('/',require('./routes/index'));
+
+// Connecting to the sql database
+con.connect();
+
+
 /*
 
         FUNCTIONS 
 
 */
 
-// Query from the database
-function Database(con, source, destination){
-    con.connect()
 
-
-    /* 
-
-        ********************IMPORTANT**********************
-        CHANGE IN DATABASE. INCLUDE RELATIONS FOR RANGES AS WELL.
-        ***************************************************
-        TODO :- 1. Route from source to destination via all the required buses
-                2. Synchronously search all buses for most appropriate route
-
-    */
-
-
+// Get the buses from source to destination
+var Database = function(source, destination){
 
     // Intersection of all the busses at Source and Destination given by user
 
@@ -107,51 +106,12 @@ function Database(con, source, destination){
             if(buses_from_destination.includes(buses_from_source[i])){
                 required_buses.push(buses_from_source[i]);
             }
-        }
+        }    
 
-
-        /*  
-            ** IN CASE IF WE DON'T GET THE ROUTES FROM GOOGLE MAP **
-
-            // Route calculation
-            var routes = [];        // Dictionary for storing routes corresponding to each bus
-            var temproute = [];     // Temporary route to assign value in the dictionary
-            
-            var flag_push = false;
-            // for(var i = 0 ; i < required_buses.length ; i++){
-    
-            //     if(required_buses)
-            // }
-            //console.log(required_buses);
-            something();
-         */
-    
-
-         // Temporary query
-    // con.query("SELECT Monday FROM B1S1 where TOA = \"2:00:00\" ", function (err, result, fields) {
-    //     if (err) throw err; 
-
-    //     // output of query is an array
-    //     // array is the dictionaries of that particular time
-    //     // where key is the day of the week
-    //     var output=result;
-    //     var temparray = output[0].Monday.split(",");
-
-    //     // Assigning integer calues in the data array
-
-    //     var datatemp = [];
-    //     for(var i = 0 ; i < temparray.length ; i++){
-    //         datatemp.push(parseInt(temparray[i]));
-    //     }
-
-    //     //console.log(datatemp);
-    //     // TODO :- ** CALL RANGE FUNCTION **
-    // });
-
-    //console.log(datatemp);
-    con.end()
-
+        console.log(required_buses);
+       return required_buses;
 }
+
 
 // Algorithm to give the range for seats
 
@@ -160,7 +120,7 @@ function RangeOfSeats(data1) {
     var data = [];
 
     for(var i = 0 ; i < data1.length ; i++ ){
-        data.push(parseInteger(data1[i]));
+        data.push(parseInt(data1[i]));
     }
 
     var Slopes=[];
@@ -195,71 +155,123 @@ function RangeOfSeats(data1) {
 
 }
 
-/*
-    END OF FUNCTIONS
-
-*/
-
 app.use(bodyparser.urlencoded({extended: false}));
 
-// HTML DOCUMENT FOR THE CUSTOMER AND SAVE THE DATA IN DATABASE
-// ******** TEST THE app.post ********
+// Update in the database when conductor adds the input
+
+function updatedb_sql(){
+
+}
+
 app.post('/',function(request,response){
 
-    con.connect();
-    // var BusNumber = request.body.user.busnumber.toString(10);
-    // var timeofArrival  = request.body.user.toa;
-    // var Boarding  = request.body.user.boarded.toString(10);
-    // var Deboarding = request.body.user.deboarded.toString(10);
+    /*  &&&&&&&&&&& get the data &&&&&&&&&&&*/
 
-    // //  **TODO :- Add the value of the current stop** 
-    // var currentstop = request.body.user.stop;
+    var BusNumber = request.body.user.busnumber.toString(10);
+    var timeofArrival  = request.body.user.toa;
+    var Boarding  = request.body.user.boarded.toString(10);
+    var Deboarding = request.body.user.deboarded.toString(10);
 
-    // // Old valuen to update the new value
-    // con.query("SELECT " + day + " FROM " + BusNumber + currentstop + " where + TOA = " + timeofArrival, function (err, result, fields) {
-    //     if (err) throw err;
-    //     var entry = result;
-    //     var seatsAtPreviosStop;
+    var currentstop = request.body.user.stop;
+
+
+    // Old valuen to update the new value
+    con.query("SELECT " + day + " FROM " + BusNumber + currentstop + " where + TOA = " + timeofArrival, function (err, result, fields) {
+        if (err) throw err;
+        var entry = result;
+        var seatsAtPreviosStop;
         
-    //     if(stops.length == 0){
-    //         seatsAtPreviosStop = 0;
-    //     }
-    //     else{
-    //         seatsAtPreviosStop = stops[stops.length-1];
-    //     }
+        if(stops.length == 0){
+            seatsAtPreviosStop = 0;
+        }
+        else{
+            seatsAtPreviosStop = stops[stops.length-1];
+        }
 
-    //     var currentSeats = Boarding - Deboarding + seatsAtPreviosStop;
-    //     stops.push(currentSeats);
+        var currentSeats = Boarding - Deboarding + seatsAtPreviosStop;
+        stops.push(currentSeats);
 
-    //     var temp = entry[0].Monday.split(":");
-    //     var data = temp[0].split(",");
-    //     data.push(currentSeats.toString(10));
+        var temp = entry[0].day.split(":");
+        var data = temp[0].split(",");
+        data.push(currentSeats.toString(10));
 
-    //     var updatedrange = RangeOfSeats(data);
-    //     var range = updatedrange[0].toString(10) + ":" + updatedrange[1].toString(10);
+        var updatedrange = RangeOfSeats(data);
+        var range = updatedrange[0].toString(10) + "-" + updatedrange[1].toString(10);
 
-    //     var updateddatapoint = data+","+range;
-    //     // Update the value
+        var updateddatapoint = data+":"+range;
+        // Update the value
 
-    //     con.query("UPDATE " + BusNumber + currentstop + " SET "+ day + " = " + updateddatapoint + " where TOA = " + timeofArrival, function (err, result, fields) {
-    //         if (err) throw err;
-    //     });
+        con.query("UPDATE \"" + BusNumber + currentstop + "\" SET \""+ day + "\" = \"" + updateddatapoint + "\" where TOA = \"" + timeofArrival, function (err, result, fields) {
+            if (err) throw err;
+        });
 
-    // });
-    // console.log("aajaaajaaajaaajajjajajajaj");
+        // Encorporating  the change if the current seat is outside the given range
+        if(currentSeats > updatedrange[1] || currentSeats < updatedrange[0]){
 
-    con.end();
+            var diff = currentSeats - updatedrange[1];
+            var delta;
+            if(diff > 0){
+                delta = diff;
+            }
+            else{
+                delta = updatedrange[0] - currentSeats;
+            }
+
+            for(var key in Route){
+                if(k == BusNumber && key.includes(currentstop)){
+
+                    for(var i in Route[key]){
+                        if(Route[key].indexOf(i) > Route[key].indexOf(currentstop)){
+
+                            con.query("SELECT " + day + " FROM " + BusNumber + currentstop + " where + TOA = " + timeofArrival, function (err, result, fields) {
+                                if (err) throw err;
+                                var entry = result;
+                                var temp2 = entry[0].split(":");
+                                var temp = temp2.split("-");
+                                var range = [];
+                                range.push(parseInt(temp[0]));
+                                range.push(parseInt(temp[1]));
+                                if(diff > 0){
+                                    range[0] += delta;
+                                    range[1] += delta;
+                                }
+                                else{
+                                    range[0] -= delta;
+                                    range[1] -= delta;
+                                }
+                                var ans = temp2[0] + ":" + range[0].toString() + "-" + range[-1].toString;
+                                con.query("UPDATE \"" + BusNumber + i + "\" SET \""+ day + "\" = \"" + ans + "\" where TOA = \"" + timeofArrival, function (err, result, fields) {
+                                    if (err) throw err;
+                                });
+                            });
+                        }
+                        
+                    }
+                }
+            }
+
+        }
+
+    });
 
 });
 
+
 // Query from the database 
 
-    // Temp Query
-    source = 'S2';
-    destination = 'S4';
+    // source = datasets.UserInput;
+    // while(source != undefined){
+    //     source = datasets.UserInput;
+    //     console.log(source);
 
-var data = Database(con, source, destination);
-console.log(data);
+    // }
+    // destination = 'S4';
+
+// var data = Database(con, source, destination);
+// console.log(data);
+
+module.exports.Database=Database;
+// module.exports.required_buses = required_buses;
 
 // Compute the number of seats
 
@@ -271,4 +283,37 @@ app.listen(port, function(err){
     }
 
     console.log('Server is up and running on http://localhost:' + port);
+});
+
+var avgAccuracy;
+var avgCleanliness;
+var avgSafety;
+
+con.query("select avg(PredictedSeats) from fb",function(err,result,fields)
+{
+    if(err) throw err;
+    avgAccuracy=result;
+    console.log(result);
+
+});
+con.query("select avg(Cleanliness) from fb",function(err,result,fields)
+{
+    if(err) throw err;
+    avgCleanliness=result;
+    console.log(result);
+
+});
+con.query("select avg(Safety) from fb",function(err,result,fields)
+
+{
+    if(err) throw err;
+    avgSafety=result;
+    console.log(result);
+
+});
+con.query("insert into fb values(accuracy,cleanliness,safety)",function(err,result,fields)
+{
+    if(err) throw err;
+    console.log(result);
+    
 });

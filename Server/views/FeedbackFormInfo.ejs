@@ -3,87 +3,14 @@
     <title> Transport Management System </title>
     <link rel = "stylesheet" type = "text/css" href = "style.css" />
 </head>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-} 
-
-#app{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-ul {
-    overflow: hidden;
-    list-style-type: none;
-    background-color: #333;
-}
-
-li {
-    float: left;
-    color: white;
-    padding: 4px;
-}
-
-li a {
-    display: block;
-    color: white;
-    padding: 16px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-li ul{
-    margin-left: 16px;
-    text-align: center;
-}
-
-li a:hover {
-    background-color: #111;
-}
-
-table {
-    margin:1em auto;
-    border: 1px solid black;
-}
-
- th, td{
-    border: 1px solid black;
-}
-
-th, td {
-    padding: 15px;
-}
-
-ol {
-    list-style-type: none;
-    background-color: beige;
-}
-
-#content {
-    flex: 1;
-}
-
-#main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>
 <body>
     <div style="padding: 8%; background-color: black; -webkit-text-fill-color: teal; text-align: center;">
         <h1>Agency Name</h1>
     </div>
     <div id="Agency Menu">
         <ul>
-            <li><a href="BreakdownsInfo.ejs"> Breakdowns </a></li>
-            <li><a href="DemandAnalysis.ejs"> Demand Analysis </a></li>
+            <li><a href="BreakdownsInfo.html"> Breakdowns </a></li>
+            <li><a href="DemandAnalysis.html"> Demand Analysis </a></li>
             <li><a> Feedback forms </a></li>
             <li style="float:right;"><a> Logout </a></li>
         </ul>
@@ -91,12 +18,32 @@ ol {
     <div id="Demands">
         <table>
             <tr>
-                <th> <b>BusID</b> </th>
-                <th> <b>(Redirection to a comulative of responses) Q1</b> </th>
-                <th> <b>(Redirection to a comulative of responses) Q2</b> </th>
-                <th> <b>(Redirection to a comulative of responses) Q3</b> </th>
-                <th> <b>(Redirection to a comulative of responses) Review</b> </th>
+                <th style="border:0px;"> <b>BusID</b> </th>
+                <th style="border:0px;"> <b>Q1:</b> </th>
+                <th style="border:0px;"> <b>Q2</b> </th>
+                <th style="border:0px;"> <b>Q3</b> </th>
+                <th style="border:0px;"> <b>Review</b> </th>
             </tr>
         </table>
+        <ul>
+            <script type="text/javascript">
+                var opts = {
+                    url: 'http://localhost:3000/rows/'
+                };
+       
+                fetch(opts)
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        }
+                    })
+                    .then((rows) => {
+                        for (row of rows) {
+                            window.print(row);
+                        }
+                    })
+                    .catch(console.log);
+            </script>
+        </ul>
     </div>
 </body>

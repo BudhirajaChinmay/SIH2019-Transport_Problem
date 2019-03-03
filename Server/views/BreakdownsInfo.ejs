@@ -1,88 +1,7 @@
-<html>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    font-family: sans-serif;
-} 
-
-#app{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-ul {
-    overflow: hidden;
-    list-style-type: none;
-    background-color: #333;
-}
-button{
-    float: left;
-    color: white;
-    padding: 4px;
-    background: #333;
-    border: #333;
-    font-size: 22px;
-}
-li {
-    float: left;
-    color: white;
-    padding: 4px;
-}
-
-li a {
-    display: block;
-    color: white;
-    padding: 16px;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-li ul{
-    margin-left: 16px;
-    text-align: center;
-}
-
-li a:hover {
-    background-color: #111;
-}
-
-table {
-    margin:1em auto;
-    border: 1px solid black;
-}
-
- th, td{
-    border: 1px solid black;
-}
-
-th, td {
-    padding: 15px;
-}
-
-ol {
-    list-style-type: none;
-    background-color: beige;
-}
-
-#content {
-    flex: 1;
-}
-
-#main {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-</style>
+<!DOCTYPE html>
 <head>
     <title> Transport Management System </title>
-    <!-- <link rel = "stylesheet" type = "text/css" href = "style.css" /> -->
+    <link rel = "stylesheet" type = "text/css" href = "style.css" />
 </head>
 <body>
     <div style="padding: 8%; background-color: black; -webkit-text-fill-color: teal; text-align: center;">
@@ -90,31 +9,42 @@ ol {
     </div>
     <div id="Agency Menu">
         <ul>
-            <!-- <li><a> Breakdowns </a></li> -->
-            <li>
-                <form action="/DemandAnalysis" method="GET">
-                        <button id = "1"> Demand Analysis </button>
-                      </form></li>
-            <li>
-                    <form action="/FeedbackInfo" method="GET">
-                        <button id = "1"> Feedback forms </button>
-                      </form></li>
-            <!-- <li style="float:right;"><a> </a></li> -->
+            <li><a> Breakdowns </a></li>
+            <li><a href="DemandAnalysis.html"> Demand Analysis </a></li>
+            <li><a href="FeedbackFormInfo.html"> Feedback forms </a></li>
+            <li style="float:right;"><a> Logout </a></li>
         </ul>
     </div>
     <div id="Breakdowns">
         <table style="margin:1em auto;">
             <tr>
-                <th> Bus ID </th>
-                <th> Place </th>
-                <th> Licence Plate Number </th>
-                <th> Fault </th>
-                <th> Conductor ID </th>
-                <th> Photo </th>
+                <th style="border:0px;"> Bus ID </th>
+                <th style="border:0px;"> Place </th>
+                <th style="border:0px;"> Licence Plate Number </th>
+                <th style="border:0px;"> Fault </th>
+                <th style="border:0px;"> Conductor ID </th>
+                <th style="border:0px;"> Photo </th>
             </tr>
         </table>
+        <ul>
+            <script type="text/javascript">
+                var opts = {
+                    url: 'http://localhost:3000/rows/'
+                };
+       
+                fetch(opts)
+                    .then((res) => {
+                        if (res.ok) {
+                            return res.json();
+                        }
+                    })
+                    .then((rows) => {
+                        for (row of rows) {
+                            window.print(row);
+                        }
+                    })
+                    .catch(console.log);
+            </script>
+        </ul>
     </div>
 </body>
-</html>
-
-
