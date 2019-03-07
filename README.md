@@ -1,10 +1,9 @@
 # SIH2019-Transport_Problem
 
 Prerequisites:
-Node.js
+JavaScript
 HTML
 CSS
-JavaScript
 A little familiarity with the Terminal/Powershell/Command Prompt
 Node.js
 SQL
