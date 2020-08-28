@@ -15,7 +15,7 @@ To install the required packages for the project, 'npm install' command is used.
 SQL Server needs to be installed.
 
 
-Description
+Description: 
 This web application gives all possible routes from source to destination entered by the user and gives a predicted number of seats available in the bus when it arrives on the stop from where user will board the bus. It gives the government agencies data for all the buses whose frequency needs to be increased as well as metros for which number of seats needs to be increased.
 
 Our algorithm works on providing a passenger with sufficient information about a public transport media. Our major focus is on the number of vacant seats available, for any passenger at any stop, for all buses, that operate within given time intervals; computed weekly. It then calculates the change in number of vacant seats and plots it's graph with respect to the given time intervals. (For example, number of vacant seats on Monday1 of stop1 of bus1 at time t1 was 10 and number of vacant seats on Monday2 of stop1 at time t1 was 15, then change in number of seats in 5). We calculate the average and standard deviation of the change in the number of vacant seats. The cluster of changes would lie between (average change + standard deviation) and (average change - standard deviation). 
